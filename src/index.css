@@ -94,9 +94,7 @@ All colors MUST be HSL.
     --sidebar-border: 220 18% 22%;
     --sidebar-ring: 188 90% 45%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -123,3 +121,4 @@ All colors MUST be HSL.
     --border: 220 14% 90%;
   }
 }
+
