@@ -71,7 +71,7 @@ const Index = () => {
             <div className="md:col-span-5">
               <div className="rounded-xl border border-border/60 bg-gradient-to-br from-primary/10 to-accent/10 p-8 shadow-[var(--shadow-glow)]">
                 <p className="text-sm uppercase tracking-widest text-muted-foreground mb-3">Trusted outcomes</p>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-3 text-sm text-foreground">
                   <li>• 10x faster delivery with modern tooling</li>
                   <li>• Battle-tested architectures</li>
                   <li>• Security-first by design</li>
