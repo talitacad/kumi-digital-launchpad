@@ -240,7 +240,7 @@ const Index = () => {
             loading="lazy"
             decoding="async"
           />
-          <p className="mt-4 text-xs text-muted-foreground">© 2025 KUMI Digital LLC. All rights reserved.</p>
+          <p className="mt-2 text-xs text-muted-foreground">© 2025 KUMI Digital LLC. All rights reserved.</p>
         </div>
       </footer>
     </div>
