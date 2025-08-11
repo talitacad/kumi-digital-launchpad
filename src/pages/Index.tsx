@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Code, Cloud, Shield, ChevronRight } from "lucide-react";
+import { Code, Search, Rocket, ChevronRight } from "lucide-react";
 
 const Index = () => {
   const { toast } = useToast();
@@ -112,26 +112,26 @@ const Index = () => {
             <div className="grid md:grid-cols-3 gap-6">
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Code className="size-5 text-primary" /> Product Engineering</CardTitle>
+                  <CardTitle className="flex items-center gap-3"><Search className="size-5 text-primary" /> Discovery & Strategy</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground">
-                  Full-stack web and mobile apps with modern frameworks, CI/CD, and testing discipline.
+                  We dive deep into your current operations to understand your unique challenges and map out a clear path for digital transformation.
                 </CardContent>
               </Card>
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Cloud className="size-5 text-primary" /> Cloud & DevOps</CardTitle>
+                  <CardTitle className="flex items-center gap-3"><Code className="size-5 text-primary" /> Custom Development</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground">
-                  Cloud-native infrastructure, containerization, observability, and cost optimization.
+                  Our team builds your tailored platform using flexible and powerful technology, ensuring it fits your process perfectly.
                 </CardContent>
               </Card>
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Shield className="size-5 text-primary" /> Security by Design</CardTitle>
+                  <CardTitle className="flex items-center gap-3"><Rocket className="size-5 text-primary" /> Launch & Support</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground">
-                  Threat modeling, secure SDLC, and compliance-ready architectures from day one.
+                  We handle the full implementation, train your team, and provide ongoing support to ensure your business continues to rise.
                 </CardContent>
               </Card>
             </div>
