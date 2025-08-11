@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 222 40% 6%;
     --popover-foreground: 210 20% 96%;
 
-    --primary: 188 90% 45%;            /* Cyan/Teal accent */
+    --primary: 184 12% 27%;            /* Brand dark gray-green */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 222 32% 16%;
@@ -35,7 +35,7 @@ All colors MUST be HSL.
 
     --border: 220 18% 22%;
     --input: 220 18% 22%;
-    --ring: 188 90% 45%;
+    --ring: 184 12% 27%;
 
     --radius: 0.8rem;
 
@@ -67,7 +67,7 @@ All colors MUST be HSL.
     --popover: 222 40% 6%;
     --popover-foreground: 210 20% 96%;
 
-    --primary: 188 90% 45%;
+    --primary: 184 12% 27%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 222 32% 16%;
@@ -84,7 +84,7 @@ All colors MUST be HSL.
 
     --border: 220 18% 22%;
     --input: 220 18% 22%;
-    --ring: 188 90% 45%;
+    --ring: 184 12% 27%;
     --sidebar-background: 222 40% 6%;
     --sidebar-foreground: 210 20% 96%;
     --sidebar-primary: 188 90% 45%;
@@ -113,5 +113,13 @@ All colors MUST be HSL.
   ::selection {
     background-color: hsl(var(--primary) / 0.25);
     color: hsl(var(--foreground));
+  }
+
+  /* Hero light theme scope */
+  .hero-light {
+    --background: 0 0% 97%;
+    --foreground: 220 10% 12%;
+    --muted-foreground: 220 8% 38%;
+    --border: 220 14% 90%;
   }
 }

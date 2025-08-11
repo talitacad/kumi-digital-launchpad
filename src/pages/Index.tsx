@@ -1,4 +1,4 @@
-import { useRef } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,16 +8,6 @@ import { Code, Cloud, Shield, ChevronRight } from "lucide-react";
 
 const Index = () => {
   const { toast } = useToast();
-  const glowRef = useRef<HTMLDivElement>(null);
-
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!glowRef.current) return;
-    const rect = glowRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    glowRef.current.style.setProperty("--x", `${x}px`);
-    glowRef.current.style.setProperty("--y", `${y}px`);
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,17 +47,14 @@ const Index = () => {
 
       <main>
         {/* Hero */}
-        <section id="home" onMouseMove={onMouseMove} className="relative overflow-hidden">
-          <div ref={glowRef} aria-hidden className="pointer-events-none absolute inset-0" style={{
-            background: `radial-gradient(600px 300px at var(--x,50%) var(--y,40%), hsl(var(--primary)/0.18), transparent 60%)`
-          }} />
+        <section id="home" className="hero-light relative overflow-hidden bg-background">
           <div className="container mx-auto grid md:grid-cols-12 gap-8 items-center py-24">
             <div className="md:col-span-7 space-y-6">
-              <h1 className="text-4xl md:text-6xl font-semibold leading-tight">
-                KUMI Digital — modern tech consultancy for ambitious teams
+              <h1 className="font-playfair text-5xl md:text-7xl font-bold leading-tight tracking-tight">
+                Time to rise.
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-                We design, build, and scale cloud-native software that moves your business forward — fast, secure, and reliable.
+              <p className="font-montserrat text-lg md:text-xl text-muted-foreground max-w-2xl">
+                We build custom digital systems that organize your operational chaos and prepare your business to grow.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="#contact">
