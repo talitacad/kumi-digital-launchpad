@@ -50,10 +50,10 @@ const Index = () => {
         <section id="home" className="hero-light relative overflow-hidden bg-background">
           <div className="container mx-auto grid md:grid-cols-12 gap-8 items-center py-24">
             <div className="md:col-span-7 space-y-6">
-              <h1 className="font-playfair text-5xl md:text-7xl font-bold leading-tight tracking-tight">
+              <h1 className="font-playfair text-primary text-5xl md:text-7xl font-bold leading-tight tracking-tight">
                 Time to rise.
               </h1>
-              <p className="font-montserrat text-lg md:text-xl text-muted-foreground max-w-2xl">
+              <p className="font-montserrat text-lg md:text-xl text-primary max-w-2xl">
                 We build custom digital systems that organize your operational chaos and prepare your business to grow.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
