@@ -5,66 +5,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Code, Search, Rocket, ChevronRight } from "lucide-react";
-import { useState } from "react";
+
 const Index = () => {
   const { toast } = useToast();
-  const [webhookUrl, setWebhookUrl] = useState("");
-  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
+    const data = new FormData(e.currentTarget);
     const name = String(data.get("name") || "");
-    const email = String(data.get("email") || "");
-    const company = String(data.get("company") || "");
-    const message = String(data.get("message") || "");
-
-    if (!webhookUrl) {
-      toast({
-        title: "Webhook required",
-        description: "Please enter your Zapier webhook URL to send the email.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSending(true);
-
-    try {
-      await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "no-cors",
-        body: JSON.stringify({
-          timestamp: new Date().toISOString(),
-          destination_email: "talitacad@gmail.com",
-          name,
-          email,
-          company,
-          message,
-          triggered_from: window.location.origin,
-        }),
-      });
-
-      toast({
-        title: "Thanks!",
-        description: `${name ? name + ", " : ""}we'll be in touch shortly.`,
-      });
-      form.reset();
-    } catch (error) {
-      console.error("Error triggering webhook:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send. Please check the webhook URL and try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSending(false);
-    }
+    toast({
+      title: "Thanks!",
+      description: `${name ? name + ", " : ""}we'll be in touch shortly.`,
+    });
+    e.currentTarget.reset();
   };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
@@ -196,16 +151,6 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <form className="grid md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-                  <div className="md:col-span-2">
-                    <label className="text-xs text-muted-foreground mb-2 block" htmlFor="webhook">Zapier Webhook URL (admin)</label>
-                    <Input
-                      id="webhook"
-                      type="url"
-                      placeholder="https://hooks.zapier.com/hooks/catch/..."
-                      value={webhookUrl}
-                      onChange={(e) => setWebhookUrl(e.target.value)}
-                    />
-                  </div>
                   <div className="md:col-span-1">
                     <label className="text-sm mb-2 block" htmlFor="name">Name</label>
                     <Input id="name" name="name" required placeholder="Your name" />
@@ -223,7 +168,7 @@ const Index = () => {
                     <Textarea id="message" name="message" required placeholder="How can we help?" rows={5} />
                   </div>
                   <div className="md:col-span-2 flex justify-end">
-                    <Button type="submit" disabled={isSending}>{isSending ? "Sending..." : "Send message"}</Button>
+                    <Button type="submit">Send message</Button>
                   </div>
                 </form>
               </CardContent>
