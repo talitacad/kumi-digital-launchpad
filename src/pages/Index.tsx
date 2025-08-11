@@ -178,12 +178,15 @@ const Index = () => {
       </main>
 
       <footer className="border-t border-border/60">
-        <div className="container mx-auto py-8 text-sm text-muted-foreground flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>© {new Date().getFullYear()} KUMI Digital</div>
-          <div className="flex items-center gap-6">
-            <a href="#services" className="hover:text-primary">Services</a>
-            <a href="#contact" className="hover:text-primary">Contact</a>
-          </div>
+        <div className="container mx-auto py-10 flex flex-col items-center text-center">
+          <img
+            src="/lovable-uploads/77ff87bf-242f-4fc0-ad8d-eef889aa82ae.png"
+            alt="KUMI Digital — Where businesses rise. logo"
+            className="h-12 w-auto md:h-14"
+            loading="lazy"
+            decoding="async"
+          />
+          <p className="mt-4 text-xs text-muted-foreground">© 2025 KUMI Digital LLC. All rights reserved.</p>
         </div>
       </footer>
     </div>
