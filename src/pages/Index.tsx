@@ -73,10 +73,9 @@ const Index = () => {
             <img
               src="/lovable-uploads/badccfc8-31ef-4fd8-95bf-0ca140f32528.png"
               alt="KUMI Digital logo"
-              className="h-24 w-auto"
+              className="h-8 w-auto"
               loading="lazy"
             />
-            <span className="font-semibold tracking-wide">KUMI Digital</span>
           </a>
           <div className="hidden md:flex items-center gap-6 text-sm">
             <a href="#home" className="hover:text-primary transition-colors">Home</a>
