@@ -71,7 +71,7 @@ const Index = () => {
         <nav className="container mx-auto flex items-center justify-between py-4">
           <a href="#home" className="flex items-center gap-3">
             <img
-              src="/lovable-uploads/badccfc8-31ef-4fd8-95bf-0ca140f32528.png"
+              src="/lovable-uploads/a32748c5-12e0-4b25-83a5-c008d2c98dc2.png"
               alt="KUMI Digital logo"
               className="h-8 w-auto"
               loading="lazy"
