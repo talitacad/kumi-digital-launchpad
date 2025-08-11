@@ -83,26 +83,24 @@ const Index = () => {
 
         {/* About */}
         <section id="about" className="py-20 border-t border-border/60">
-          <div className="container mx-auto grid md:grid-cols-12 gap-10 items-start">
-            <div className="md:col-span-6 space-y-4">
-              <h2 className="text-3xl md:text-4xl font-semibold">About KUMI Digital</h2>
-              <p className="text-muted-foreground">
-                We are a boutique consultancy partnering with startups and enterprises to deliver elegant, scalable systems. Our experts bring deep experience in modern web, cloud platforms, and data engineering.
-              </p>
+          <div className="container mx-auto grid md:grid-cols-12 gap-10 items-center">
+            {/* Left: Branding logo */}
+            <div className="md:col-span-5 flex justify-center">
+              <img
+                src="/lovable-uploads/ac2d0f5f-7c53-4040-a503-e3c1000c94bf.png"
+                alt="KUMI Digital primary logo"
+                className="w-48 sm:w-56 md:w-72 lg:w-80 xl:w-96 h-auto"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <div className="md:col-span-6 grid grid-cols-2 gap-4">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-3xl font-semibold">99.9%</div>
-                  <p className="text-sm text-muted-foreground">Uptime targets we engineer for</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-3xl font-semibold"><span className="text-primary">$</span>MM</div>
-                  <p className="text-sm text-muted-foreground">Revenue scaled on our platforms</p>
-                </CardContent>
-              </Card>
+
+            {/* Right: Mission copy */}
+            <div className="md:col-span-7 space-y-4 font-montserrat">
+              <h2 className="font-playfair text-3xl md:text-4xl font-semibold">Our Mission is Your Growth.</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                KUMI was born from a simple observation: growing businesses are often left behind by technology. Generic tools don't fit, and custom solutions are out of reach. Our mission is to fill this gap. We believe technology should adapt to human processes, not the other way around. Our team of strategists and engineers partners with you to build the exact solution your operation needs. The name KUMI comes from the ancient Aramaic word for 'Rise'. It's our promise to every client: to provide the foundation for your business to rise.
+              </p>
             </div>
           </div>
         </section>
