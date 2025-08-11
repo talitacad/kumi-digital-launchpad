@@ -73,7 +73,7 @@ const Index = () => {
             <img
               src="/lovable-uploads/d32d4395-8fa6-463a-9db3-5cef24b9e299.png"
               alt="KUMI Digital logo"
-              className="h-24 w-auto"
+              className="h-8 w-auto"
               loading="lazy"
             />
           </a>
