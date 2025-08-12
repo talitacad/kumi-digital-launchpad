@@ -140,8 +140,13 @@ const Index = () => {
 
               {wizardStep === 3 && (
                 <div className="space-y-3">
-                  <p className="text-sm text-muted-foreground">Where can we reach you?</p>
-                  <Input type="email" placeholder="you@company.com" />
+                  <p className="text-sm text-muted-foreground">Approximately how many people are on your team?</p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>It's just me</Button>
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>2-5 people</Button>
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>6-15 people</Button>
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>More than 15 people</Button>
+                  </div>
                 </div>
               )}
             </div>
