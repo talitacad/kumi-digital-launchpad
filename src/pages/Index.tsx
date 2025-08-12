@@ -14,7 +14,7 @@ const Index = () => {
   const [isSending, setIsSending] = useState(false);
   const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardStep, setWizardStep] = useState(1);
-  const totalSteps = 3;
+  const totalSteps = 4;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -142,10 +142,22 @@ const Index = () => {
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">Approximately how many people are on your team?</p>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>It's just me</Button>
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>2-5 people</Button>
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>6-15 people</Button>
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>More than 15 people</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(4)}>It's just me</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(4)}>2-5 people</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(4)}>6-15 people</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(4)}>More than 15 people</Button>
+                  </div>
+                </div>
+              )}
+
+              {wizardStep === 4 && (
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground">On average, how many active clients do you serve per month?</p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>Up to 50</Button>
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>51 to 150</Button>
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>151 to 300</Button>
+                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>More than 300</Button>
                   </div>
                 </div>
               )}
