@@ -55,6 +55,9 @@ All colors MUST be HSL.
                         radial-gradient(600px 300px at 80% 10%, hsl(var(--accent) / 0.18), transparent 60%);
     --shadow-elevate: 0 10px 30px -10px hsl(var(--primary) / 0.35);
     --shadow-glow: 0 0 40px hsl(var(--primary) / 0.35);
+
+    /* Surfaces */
+    --surface-soft: 0 0% 97%;
   }
 
   .dark {
@@ -93,6 +96,9 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 210 20% 96%;
     --sidebar-border: 220 18% 22%;
     --sidebar-ring: 188 90% 45%;
+
+    /* Surfaces */
+    --surface-soft: 0 0% 97%;
   }
 
   * {

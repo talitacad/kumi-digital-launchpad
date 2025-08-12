@@ -202,7 +202,7 @@ const Index = () => {
           if (!o) setWizardStep(1);
         }}
       >
-        <DialogContent className="sm:max-w-xl">
+        <DialogContent className="w-[96vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl hero-light bg-[hsl(var(--surface-soft))] p-6 md:p-8 rounded-xl">
           {wizardStep <= totalSteps && (
             <DialogHeader>
               <DialogTitle>Project Wizard</DialogTitle>
