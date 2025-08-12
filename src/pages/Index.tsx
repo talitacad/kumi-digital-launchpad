@@ -24,6 +24,7 @@ const Index = () => {
   const [contactCompany, setContactCompany] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
+  const [wizardSuccessMessage, setWizardSuccessMessage] = useState("");
   const totalSteps = 5;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -118,10 +119,13 @@ const Index = () => {
         });
       }
 
-      toast({ title: "Submitted", description: "Thanks! We'll reach out shortly." });
-      // Reset wizard state
-      setWizardOpen(false);
-      setWizardStep(1);
+      const method = contactMethod;
+      const successMsg = method === "Email"
+        ? "Thank you! We've received your information and our team will contact you by email shortly with an initial analysis."
+        : "Thank you! We've received your information and our team will contact you by phone shortly to schedule a conversation.";
+      setWizardSuccessMessage(successMsg);
+      setWizardStep(totalSteps + 1);
+      // Reset wizard fields (keep dialog open to show success)
       setIndustry("");
       setChallenge("");
       setTeamSize("");
@@ -277,6 +281,12 @@ const Index = () => {
                       {isSubmittingLead ? "Submitting..." : "Submit"}
                     </Button>
                   </div>
+                </div>
+              )}
+              {wizardStep === totalSteps + 1 && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Success</h3>
+                  <p className="text-sm text-muted-foreground">{wizardSuccessMessage}</p>
                 </div>
               )}
             </div>
