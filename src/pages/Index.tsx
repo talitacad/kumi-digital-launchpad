@@ -462,7 +462,7 @@ const Index = () => {
         <section id="services" className="py-20 border-t border-border/60">
           <div className="container mx-auto">
             <h2 className="text-3xl md:text-4xl font-semibold mb-10">Services</h2>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-3 gap-6">
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3"><Search className="size-5 text-primary" /> Discovery & Strategy</CardTitle>
