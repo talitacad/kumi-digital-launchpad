@@ -28,7 +28,7 @@ const Index = () => {
   const [bestTimeToCall, setBestTimeToCall] = useState("");
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [wizardSuccessMessage, setWizardSuccessMessage] = useState("");
-  const totalSteps = 5;
+  const totalSteps = 6;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -126,9 +126,13 @@ const Index = () => {
       const successMsg = method === "Email"
         ? "Thank you! We've received your information and our team will contact you by email shortly with an initial analysis."
         : "Thank you! We've received your information and our team will contact you by phone shortly to schedule a conversation at your preferred time.";
-      setWizardSuccessMessage(successMsg);
-      setWizardStep(totalSteps + 1);
-      // Reset wizard fields (keep dialog open to show success)
+
+      // Close popup and show success message
+      setWizardOpen(false);
+      setWizardStep(1);
+      toast({ title: "Success", description: successMsg });
+
+      // Reset wizard fields
       setIndustry("");
       setChallenge("");
       setTeamSize("");
@@ -272,17 +276,23 @@ const Index = () => {
                   <div className="flex gap-2">
                     <Button
                       variant={contactMethod === "Email" ? "default" : "secondary"}
-                      onClick={() => setContactMethod("Email")}
+                      onClick={() => { setContactMethod("Email"); setWizardStep(6); }}
                     >
                       Email
                     </Button>
                     <Button
                       variant={contactMethod === "Phone" ? "default" : "secondary"}
-                      onClick={() => setContactMethod("Phone")}
+                      onClick={() => { setContactMethod("Phone"); setWizardStep(6); }}
                     >
                       Phone
                     </Button>
                   </div>
+                </div>
+              )}
+
+              {wizardStep === 6 && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Great! Please provide your details.</h3>
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="md:col-span-1">
@@ -297,27 +307,27 @@ const Index = () => {
                       <label className="text-sm mb-2 block" htmlFor="lead-company">Company Name</label>
                       <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
                     </div>
-                      {contactMethod === "Phone" && (
-                        <>
-                          <div className="md:col-span-2">
-                            <label className="text-sm mb-2 block" htmlFor="lead-phone">Phone Number</label>
-                            <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
-                          </div>
-                          <div className="md:col-span-2">
-                            <label className="text-sm mb-2 block" htmlFor="best-time">Best time to call</label>
-                            <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
-                              <SelectTrigger id="best-time" aria-label="Best time to call">
-                                <SelectValue placeholder="Select a time" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
-                                <SelectItem value="Afternoon (1pm-5pm)">Afternoon (1pm-5pm)</SelectItem>
-                                <SelectItem value="Evening (5pm-8pm)">Evening (5pm-8pm)</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        </>
-                      )}
+                    {contactMethod === "Phone" && (
+                      <>
+                        <div className="md:col-span-2">
+                          <label className="text-sm mb-2 block" htmlFor="lead-phone">Phone Number</label>
+                          <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
+                        </div>
+                        <div className="md:col-span-2">
+                          <label className="text-sm mb-2 block" htmlFor="best-time">Best time to call</label>
+                          <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
+                            <SelectTrigger id="best-time" aria-label="Best time to call">
+                              <SelectValue placeholder="Select a time" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
+                              <SelectItem value="Afternoon (1pm-5pm)">Afternoon (1pm-5pm)</SelectItem>
+                              <SelectItem value="Evening (5pm-8pm)">Evening (5pm-8pm)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <div className="flex justify-end">
@@ -325,12 +335,6 @@ const Index = () => {
                       {isSubmittingLead ? "Submitting..." : "Submit"}
                     </Button>
                   </div>
-                </div>
-              )}
-              {wizardStep === totalSteps + 1 && (
-                <div className="space-y-4 text-center py-6">
-                  <h3 className="text-xl font-semibold">Success</h3>
-                  <p className="text-sm text-muted-foreground max-w-prose mx-auto">{wizardSuccessMessage}</p>
                 </div>
               )}
             </div>
