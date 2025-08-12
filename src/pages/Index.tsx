@@ -317,7 +317,7 @@ const Index = () => {
                           <label className="text-sm mb-0 block" htmlFor="best-time">Best time to call</label>
                           <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
                             <SelectTrigger id="best-time" aria-label="Best time to call">
-                              <SelectValue placeholder="Select a time" />
+                              <SelectValue placeholder="Selecione um dos horários" />
                             </SelectTrigger>
                             <SelectContent className="z-[60] bg-popover border border-border shadow-lg">
                               <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
