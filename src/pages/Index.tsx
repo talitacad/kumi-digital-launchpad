@@ -9,7 +9,7 @@ import { Code, Search, Rocket, ChevronRight, Menu } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Index = () => {
   const { toast } = useToast();
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -29,6 +29,13 @@ const Index = () => {
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [wizardSuccessMessage, setWizardSuccessMessage] = useState("");
   const totalSteps = 6;
+
+  // Ensure the time dropdown shows the placeholder when entering Step 6 (Phone)
+  useEffect(() => {
+    if (wizardStep === 6 && contactMethod === "Phone") {
+      setBestTimeToCall("");
+    }
+  }, [wizardStep, contactMethod]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
