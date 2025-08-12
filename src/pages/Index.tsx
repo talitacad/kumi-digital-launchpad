@@ -293,8 +293,8 @@ const Index = () => {
               {wizardStep === 6 && (
                 <section aria-labelledby="wizard-contact-title" className="mx-auto max-w-3xl w-full">
                   {contactMethod === "Phone" ? (
-                    <div className="space-y-6">
-                      <h3 id="wizard-contact-title" className="text-lg font-semibold text-center">Great! Please provide your details.</h3>
+                    <div className="min-h-[320px] flex items-center justify-center">
+                      <h3 id="wizard-contact-title" className="text-xl font-semibold text-center">Great! Please provide your details.</h3>
                     </div>
                   ) : (
                     <div className="space-y-6">
