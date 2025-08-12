@@ -296,25 +296,25 @@ const Index = () => {
                     <div className="space-y-6">
                       <h3 id="wizard-contact-title" className="text-xl font-semibold text-center text-foreground">Great! Please provide your details.</h3>
 
-                      <div className="max-w-md mx-auto space-y-1">
+                      <div className="max-w-md mx-auto space-y-0">
                         <div>
-                          <label className="text-sm mb-2 block" htmlFor="lead-name">Your Name</label>
+                          <label className="text-sm mb-0 block" htmlFor="lead-name">Your Name</label>
                           <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
                         </div>
                         <div>
-                          <label className="text-sm mb-2 block" htmlFor="lead-email">Your Email</label>
+                          <label className="text-sm mb-0 block" htmlFor="lead-email">Your Email</label>
                           <Input id="lead-email" type="email" placeholder="you@company.com" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
                         </div>
                         <div>
-                          <label className="text-sm mb-2 block" htmlFor="lead-company">Company Name</label>
+                          <label className="text-sm mb-0 block" htmlFor="lead-company">Company Name</label>
                           <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
                         </div>
                         <div>
-                          <label className="text-sm mb-2 block" htmlFor="lead-phone">Phone Number</label>
+                          <label className="text-sm mb-0 block" htmlFor="lead-phone">Phone Number</label>
                           <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
                         </div>
                         <div>
-                          <label className="text-sm mb-2 block" htmlFor="best-time">Best time to call</label>
+                          <label className="text-sm mb-0 block" htmlFor="best-time">Best time to call</label>
                           <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
                             <SelectTrigger id="best-time" aria-label="Best time to call">
                               <SelectValue placeholder="Select a time" />
@@ -333,17 +333,17 @@ const Index = () => {
                     <div className="space-y-6">
                       <h3 id="wizard-contact-title" className="text-lg font-semibold text-center">Great! Please provide your details.</h3>
 
-                      <div className="grid md:grid-cols-2 gap-1">
+                      <div className="grid md:grid-cols-2 gap-0">
                         <div className="md:col-span-1">
-                          <label className="text-sm mb-2 block" htmlFor="lead-name">Your Name</label>
+                          <label className="text-sm mb-0 block" htmlFor="lead-name">Your Name</label>
                           <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
                         </div>
                         <div className="md:col-span-1">
-                          <label className="text-sm mb-2 block" htmlFor="lead-email">Your Email</label>
+                          <label className="text-sm mb-0 block" htmlFor="lead-email">Your Email</label>
                           <Input id="lead-email" type="email" placeholder="you@company.com" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
                         </div>
                         <div className="md:col-span-2">
-                          <label className="text-sm mb-2 block" htmlFor="lead-company">Company Name</label>
+                          <label className="text-sm mb-0 block" htmlFor="lead-company">Company Name</label>
                           <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
                         </div>
                       </div>
