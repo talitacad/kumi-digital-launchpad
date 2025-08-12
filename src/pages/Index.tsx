@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Code, Search, Rocket, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
@@ -23,6 +24,7 @@ const Index = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactCompany, setContactCompany] = useState("");
   const [contactPhone, setContactPhone] = useState("");
+  const [bestTimeToCall, setBestTimeToCall] = useState("");
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [wizardSuccessMessage, setWizardSuccessMessage] = useState("");
   const totalSteps = 5;
@@ -88,7 +90,7 @@ const Index = () => {
       toast({ title: "Select a contact method", description: "Choose Email or Phone to continue.", variant: "destructive" });
       return;
     }
-    if (!contactName || !contactEmail || !contactCompany || (contactMethod === "Phone" && !contactPhone)) {
+    if (!contactName || !contactEmail || !contactCompany || (contactMethod === "Phone" && (!contactPhone || !bestTimeToCall))) {
       toast({ title: "Missing details", description: "Please fill in all required fields.", variant: "destructive" });
       return;
     }
@@ -106,7 +108,7 @@ const Index = () => {
       email: contactEmail,
       company: contactCompany,
       phone: contactPhone || undefined,
-      triggered_from: window.location.origin,
+      bestTimeToCall: contactMethod === "Phone" ? bestTimeToCall : undefined,
     };
 
     try {
@@ -122,7 +124,7 @@ const Index = () => {
       const method = contactMethod;
       const successMsg = method === "Email"
         ? "Thank you! We've received your information and our team will contact you by email shortly with an initial analysis."
-        : "Thank you! We've received your information and our team will contact you by phone shortly to schedule a conversation.";
+        : "Thank you! We've received your information and our team will contact you by phone shortly to schedule a conversation at your preferred time.";
       setWizardSuccessMessage(successMsg);
       setWizardStep(totalSteps + 1);
       // Reset wizard fields (keep dialog open to show success)
@@ -135,6 +137,7 @@ const Index = () => {
       setContactEmail("");
       setContactCompany("");
       setContactPhone("");
+      setBestTimeToCall("");
     } catch (error) {
       console.error("Error submitting lead:", error);
       toast({ title: "Error", description: "Failed to submit lead. Please try again.", variant: "destructive" });
@@ -176,12 +179,14 @@ const Index = () => {
         }}
       >
         <DialogContent className="sm:max-w-xl">
-          <DialogHeader>
-            <DialogTitle>Project Wizard</DialogTitle>
-            <DialogDescription>
-              Answer a few quick questions to get started.
-            </DialogDescription>
-          </DialogHeader>
+          {wizardStep <= totalSteps && (
+            <DialogHeader>
+              <DialogTitle>Project Wizard</DialogTitle>
+              <DialogDescription>
+                Answer a few quick questions to get started.
+              </DialogDescription>
+            </DialogHeader>
+          )}
 
           <div className="space-y-4">
             <Progress value={(wizardStep / totalSteps) * 100} />
@@ -268,12 +273,27 @@ const Index = () => {
                       <label className="text-sm mb-2 block" htmlFor="lead-company">Company Name</label>
                       <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
                     </div>
-                    {contactMethod === "Phone" && (
-                      <div className="md:col-span-2">
-                        <label className="text-sm mb-2 block" htmlFor="lead-phone">Phone Number</label>
-                        <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
-                      </div>
-                    )}
+                      {contactMethod === "Phone" && (
+                        <>
+                          <div className="md:col-span-2">
+                            <label className="text-sm mb-2 block" htmlFor="lead-phone">Phone Number</label>
+                            <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
+                          </div>
+                          <div className="md:col-span-2">
+                            <label className="text-sm mb-2 block" htmlFor="best-time">Best time to call</label>
+                            <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
+                              <SelectTrigger id="best-time" aria-label="Best time to call">
+                                <SelectValue placeholder="Select a time" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
+                                <SelectItem value="Afternoon (1pm-5pm)">Afternoon (1pm-5pm)</SelectItem>
+                                <SelectItem value="Evening (5pm-8pm)">Evening (5pm-8pm)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </>
+                      )}
                   </div>
 
                   <div className="flex justify-end">
@@ -284,35 +304,41 @@ const Index = () => {
                 </div>
               )}
               {wizardStep === totalSteps + 1 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Success</h3>
-                  <p className="text-sm text-muted-foreground">{wizardSuccessMessage}</p>
+                <div className="space-y-4 text-center py-6">
+                  <h3 className="text-xl font-semibold">Success</h3>
+                  <p className="text-sm text-muted-foreground max-w-prose mx-auto">{wizardSuccessMessage}</p>
                 </div>
               )}
             </div>
           </div>
 
-          <DialogFooter>
-            <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
-            <div className="ml-auto flex gap-2">
-              <Button
-                variant="secondary"
-                onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
-                disabled={wizardStep === 1}
-              >
-                Back
-              </Button>
-              {wizardStep < totalSteps && (
+          {wizardStep <= totalSteps ? (
+            <DialogFooter>
+              <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
+              <div className="ml-auto flex gap-2">
                 <Button
-                  onClick={() => {
-                    if (wizardStep < totalSteps) setWizardStep(wizardStep + 1);
-                  }}
+                  variant="secondary"
+                  onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
+                  disabled={wizardStep === 1}
                 >
-                  Next
+                  Back
                 </Button>
-              )}
+                {wizardStep < totalSteps && (
+                  <Button
+                    onClick={() => {
+                      if (wizardStep < totalSteps) setWizardStep(wizardStep + 1);
+                    }}
+                  >
+                    Next
+                  </Button>
+                )}
+              </div>
+            </DialogFooter>
+          ) : (
+            <div className="flex justify-end">
+              <Button onClick={() => { setWizardOpen(false); setWizardStep(1); }}>Close</Button>
             </div>
-          </DialogFooter>
+          )}
         </DialogContent>
       </Dialog>
 
