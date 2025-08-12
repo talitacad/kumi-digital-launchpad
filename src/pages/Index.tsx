@@ -216,14 +216,14 @@ const Index = () => {
             </DialogHeader>
           )}
 
-          <div className="space-y-4">
-            <Progress value={(wizardStep / totalSteps) * 100} />
+          <div className="mx-auto max-w-3xl space-y-6">
+            <div className="mx-auto max-w-2xl"><Progress value={(wizardStep / totalSteps) * 100} /></div>
 
             <div className="min-h-28">
               {wizardStep === 1 && (
                 <div className="space-y-3">
-                  <p className="text-sm text-muted-foreground">What industry is your business in?</p>
-                  <div className="flex flex-wrap gap-2">
+                  <p className="text-sm text-muted-foreground text-center">What industry is your business in?</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <Button variant="secondary" onClick={() => { setIndustry("Services (Clinics, Salons)"); setWizardStep(2); }}>Services (Clinics, Salons)</Button>
                     <Button variant="secondary" onClick={() => { setIndustry("Education (Schools, Courses)"); setWizardStep(2); }}>Education (Schools, Courses)</Button>
                     <Button variant="secondary" onClick={() => { setIndustry("Health & Wellness (Gyms, Studios)"); setWizardStep(2); }}>Health & Wellness (Gyms, Studios)</Button>
@@ -234,8 +234,8 @@ const Index = () => {
 
               {wizardStep === 2 && (
                 <div className="space-y-3">
-                  <p className="text-sm text-muted-foreground">What is your biggest challenge today?</p>
-                  <div className="flex flex-wrap gap-2">
+                  <p className="text-sm text-muted-foreground text-center">What is your biggest challenge today?</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <Button variant="secondary" onClick={() => { setChallenge("Organizing customer data"); setWizardStep(3); }}>Organizing customer data</Button>
                     <Button variant="secondary" onClick={() => { setChallenge("Managing schedules and tasks"); setWizardStep(3); }}>Managing schedules and tasks</Button>
                     <Button variant="secondary" onClick={() => { setChallenge("Tracking performance (reports)"); setWizardStep(3); }}>Tracking performance (reports)</Button>
@@ -246,8 +246,8 @@ const Index = () => {
 
               {wizardStep === 3 && (
                 <div className="space-y-3">
-                  <p className="text-sm text-muted-foreground">Approximately how many people are on your team?</p>
-                  <div className="flex flex-wrap gap-2">
+                  <p className="text-sm text-muted-foreground text-center">Approximately how many people are on your team?</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <Button variant="secondary" onClick={() => { setTeamSize("It's just me"); setWizardStep(4); }}>It's just me</Button>
                     <Button variant="secondary" onClick={() => { setTeamSize("2-5 people"); setWizardStep(4); }}>2-5 people</Button>
                     <Button variant="secondary" onClick={() => { setTeamSize("6-15 people"); setWizardStep(4); }}>6-15 people</Button>
@@ -258,8 +258,8 @@ const Index = () => {
 
               {wizardStep === 4 && (
                 <div className="space-y-3">
-                  <p className="text-sm text-muted-foreground">On average, how many active clients do you serve per month?</p>
-                  <div className="flex flex-wrap gap-2">
+                  <p className="text-sm text-muted-foreground text-center">On average, how many active clients do you serve per month?</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <Button variant="secondary" onClick={() => { setClientVolume("Up to 50"); setWizardStep(5); }}>Up to 50</Button>
                     <Button variant="secondary" onClick={() => { setClientVolume("51 to 150"); setWizardStep(5); }}>51 to 150</Button>
                     <Button variant="secondary" onClick={() => { setClientVolume("151 to 300"); setWizardStep(5); }}>151 to 300</Button>
@@ -271,9 +271,9 @@ const Index = () => {
               {wizardStep === 5 && (
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">Excellent! Almost there.</h3>
-                  <p className="text-sm text-muted-foreground">How do you prefer we make first contact?</p>
+                  <p className="text-sm text-muted-foreground text-center">How do you prefer we make first contact?</p>
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 justify-center">
                     <Button
                       variant={contactMethod === "Email" ? "default" : "secondary"}
                       onClick={() => { setContactMethod("Email"); setWizardStep(6); }}
@@ -330,7 +330,7 @@ const Index = () => {
                     )}
                   </div>
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-center">
                     <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
                       {isSubmittingLead ? "Submitting..." : "Submit"}
                     </Button>

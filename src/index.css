@@ -125,6 +125,8 @@ All colors MUST be HSL.
     --foreground: 220 10% 12%;
     --muted-foreground: 220 8% 38%;
     --border: 220 14% 90%;
+    --popover: 0 0% 97%;
+    --popover-foreground: 220 10% 12%;
   }
 }
 
