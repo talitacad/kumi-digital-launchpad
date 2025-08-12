@@ -116,11 +116,12 @@ const Index = () => {
             <div className="min-h-28">
               {wizardStep === 1 && (
                 <div className="space-y-3">
-                  <p className="text-sm text-muted-foreground">What do you want to build?</p>
+                  <p className="text-sm text-muted-foreground">What industry is your business in?</p>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Web App</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Website</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Automation</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Services (Clinics, Salons)</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Education (Schools, Courses)</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Health & Wellness (Gyms, Studios)</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Other</Button>
                   </div>
                 </div>
               )}
