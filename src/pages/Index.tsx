@@ -128,11 +128,12 @@ const Index = () => {
 
               {wizardStep === 2 && (
                 <div className="space-y-3">
-                  <p className="text-sm text-muted-foreground">What’s your timeline?</p>
+                  <p className="text-sm text-muted-foreground">What is your biggest challenge today?</p>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={() => setWizardStep(3)}>ASAP</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(3)}>1–3 months</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(3)}>3+ months</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Organizing customer data</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Managing schedules and tasks</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Tracking performance (reports)</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Team communication</Button>
                   </div>
                 </div>
               )}
