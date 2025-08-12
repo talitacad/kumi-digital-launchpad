@@ -282,7 +282,7 @@ const Index = () => {
                     </Button>
                     <Button
                       variant={contactMethod === "Phone" ? "default" : "secondary"}
-                      onClick={() => { setContactMethod("Phone"); setWizardStep(6); }}
+                      onClick={() => { setContactMethod("Phone"); setBestTimeToCall(""); setWizardStep(6); }}
                     >
                       Phone
                     </Button>
