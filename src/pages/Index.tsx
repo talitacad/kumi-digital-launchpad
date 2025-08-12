@@ -14,7 +14,17 @@ const Index = () => {
   const [isSending, setIsSending] = useState(false);
   const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardStep, setWizardStep] = useState(1);
-  const totalSteps = 4;
+  const [industry, setIndustry] = useState("");
+  const [challenge, setChallenge] = useState("");
+  const [teamSize, setTeamSize] = useState("");
+  const [clientVolume, setClientVolume] = useState("");
+  const [contactMethod, setContactMethod] = useState<"Email" | "Phone" | "">("");
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactCompany, setContactCompany] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [isSubmittingLead, setIsSubmittingLead] = useState(false);
+  const totalSteps = 5;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,6 +80,65 @@ const Index = () => {
       setIsSending(false);
     }
   };
+
+  const handleWizardSubmit = async () => {
+    // Basic validation
+    if (!contactMethod) {
+      toast({ title: "Select a contact method", description: "Choose Email or Phone to continue.", variant: "destructive" });
+      return;
+    }
+    if (!contactName || !contactEmail || !contactCompany || (contactMethod === "Phone" && !contactPhone)) {
+      toast({ title: "Missing details", description: "Please fill in all required fields.", variant: "destructive" });
+      return;
+    }
+
+    setIsSubmittingLead(true);
+    const lead = {
+      timestamp: new Date().toISOString(),
+      source: "project_wizard",
+      industry,
+      challenge,
+      teamSize,
+      clientVolume,
+      contactMethod,
+      name: contactName,
+      email: contactEmail,
+      company: contactCompany,
+      phone: contactPhone || undefined,
+      triggered_from: window.location.origin,
+    };
+
+    try {
+      if (webhookUrl) {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "no-cors",
+          body: JSON.stringify({ type: "Lead", ...lead }),
+        });
+      }
+
+      toast({ title: "Submitted", description: "Thanks! We'll reach out shortly." });
+      // Reset wizard state
+      setWizardOpen(false);
+      setWizardStep(1);
+      setIndustry("");
+      setChallenge("");
+      setTeamSize("");
+      setClientVolume("");
+      setContactMethod("");
+      setContactName("");
+      setContactEmail("");
+      setContactCompany("");
+      setContactPhone("");
+    } catch (error) {
+      console.error("Error submitting lead:", error);
+      toast({ title: "Error", description: "Failed to submit lead. Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmittingLead(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
@@ -118,10 +187,10 @@ const Index = () => {
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">What industry is your business in?</p>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Services (Clinics, Salons)</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Education (Schools, Courses)</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Health & Wellness (Gyms, Studios)</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Other</Button>
+                    <Button variant="secondary" onClick={() => { setIndustry("Services (Clinics, Salons)"); setWizardStep(2); }}>Services (Clinics, Salons)</Button>
+                    <Button variant="secondary" onClick={() => { setIndustry("Education (Schools, Courses)"); setWizardStep(2); }}>Education (Schools, Courses)</Button>
+                    <Button variant="secondary" onClick={() => { setIndustry("Health & Wellness (Gyms, Studios)"); setWizardStep(2); }}>Health & Wellness (Gyms, Studios)</Button>
+                    <Button variant="secondary" onClick={() => { setIndustry("Other"); setWizardStep(2); }}>Other</Button>
                   </div>
                 </div>
               )}
@@ -130,10 +199,10 @@ const Index = () => {
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">What is your biggest challenge today?</p>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Organizing customer data</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Managing schedules and tasks</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Tracking performance (reports)</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(3)}>Team communication</Button>
+                    <Button variant="secondary" onClick={() => { setChallenge("Organizing customer data"); setWizardStep(3); }}>Organizing customer data</Button>
+                    <Button variant="secondary" onClick={() => { setChallenge("Managing schedules and tasks"); setWizardStep(3); }}>Managing schedules and tasks</Button>
+                    <Button variant="secondary" onClick={() => { setChallenge("Tracking performance (reports)"); setWizardStep(3); }}>Tracking performance (reports)</Button>
+                    <Button variant="secondary" onClick={() => { setChallenge("Team communication"); setWizardStep(3); }}>Team communication</Button>
                   </div>
                 </div>
               )}
@@ -142,10 +211,10 @@ const Index = () => {
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">Approximately how many people are on your team?</p>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={() => setWizardStep(4)}>It's just me</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(4)}>2-5 people</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(4)}>6-15 people</Button>
-                    <Button variant="secondary" onClick={() => setWizardStep(4)}>More than 15 people</Button>
+                    <Button variant="secondary" onClick={() => { setTeamSize("It's just me"); setWizardStep(4); }}>It's just me</Button>
+                    <Button variant="secondary" onClick={() => { setTeamSize("2-5 people"); setWizardStep(4); }}>2-5 people</Button>
+                    <Button variant="secondary" onClick={() => { setTeamSize("6-15 people"); setWizardStep(4); }}>6-15 people</Button>
+                    <Button variant="secondary" onClick={() => { setTeamSize("More than 15 people"); setWizardStep(4); }}>More than 15 people</Button>
                   </div>
                 </div>
               )}
@@ -154,10 +223,59 @@ const Index = () => {
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">On average, how many active clients do you serve per month?</p>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>Up to 50</Button>
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>51 to 150</Button>
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>151 to 300</Button>
-                    <Button variant="secondary" onClick={() => setWizardOpen(false)}>More than 300</Button>
+                    <Button variant="secondary" onClick={() => { setClientVolume("Up to 50"); setWizardStep(5); }}>Up to 50</Button>
+                    <Button variant="secondary" onClick={() => { setClientVolume("51 to 150"); setWizardStep(5); }}>51 to 150</Button>
+                    <Button variant="secondary" onClick={() => { setClientVolume("151 to 300"); setWizardStep(5); }}>151 to 300</Button>
+                    <Button variant="secondary" onClick={() => { setClientVolume("More than 300"); setWizardStep(5); }}>More than 300</Button>
+                  </div>
+                </div>
+              )}
+
+              {wizardStep === 5 && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Excellent! Almost there.</h3>
+                  <p className="text-sm text-muted-foreground">How do you prefer we make first contact?</p>
+
+                  <div className="flex gap-2">
+                    <Button
+                      variant={contactMethod === "Email" ? "default" : "secondary"}
+                      onClick={() => setContactMethod("Email")}
+                    >
+                      Email
+                    </Button>
+                    <Button
+                      variant={contactMethod === "Phone" ? "default" : "secondary"}
+                      onClick={() => setContactMethod("Phone")}
+                    >
+                      Phone
+                    </Button>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="md:col-span-1">
+                      <label className="text-sm mb-2 block" htmlFor="lead-name">Your Name</label>
+                      <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
+                    </div>
+                    <div className="md:col-span-1">
+                      <label className="text-sm mb-2 block" htmlFor="lead-email">Your Email</label>
+                      <Input id="lead-email" type="email" placeholder="you@company.com" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="text-sm mb-2 block" htmlFor="lead-company">Company Name</label>
+                      <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
+                    </div>
+                    {contactMethod === "Phone" && (
+                      <div className="md:col-span-2">
+                        <label className="text-sm mb-2 block" htmlFor="lead-phone">Phone Number</label>
+                        <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex justify-end">
+                    <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
+                      {isSubmittingLead ? "Submitting..." : "Submit"}
+                    </Button>
                   </div>
                 </div>
               )}
@@ -174,14 +292,15 @@ const Index = () => {
               >
                 Back
               </Button>
-              <Button
-                onClick={() => {
-                  if (wizardStep < totalSteps) setWizardStep(wizardStep + 1);
-                  else setWizardOpen(false);
-                }}
-              >
-                {wizardStep < totalSteps ? "Next" : "Finish"}
-              </Button>
+              {wizardStep < totalSteps && (
+                <Button
+                  onClick={() => {
+                    if (wizardStep < totalSteps) setWizardStep(wizardStep + 1);
+                  }}
+                >
+                  Next
+                </Button>
+              )}
             </div>
           </DialogFooter>
         </DialogContent>
