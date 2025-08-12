@@ -206,9 +206,9 @@ const Index = () => {
           if (!o) setWizardStep(1);
         }}
       >
-        <DialogContent className="w-[96vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl hero-light bg-[hsl(var(--surface-soft))] p-6 md:p-8 rounded-xl">
+        <DialogContent className="w-[95vw] md:w-[92vw] max-w-6xl hero-light bg-[hsl(var(--surface-soft))] p-8 md:p-10 lg:p-12 rounded-2xl" >
           {wizardStep <= totalSteps && (
-            <DialogHeader>
+            <DialogHeader className="text-center sm:text-center">
               <DialogTitle>Project Wizard</DialogTitle>
               <DialogDescription>
                 Answer a few quick questions to get started.
@@ -216,10 +216,10 @@ const Index = () => {
             </DialogHeader>
           )}
 
-          <div className="mx-auto max-w-3xl space-y-6">
-            <div className="mx-auto max-w-2xl"><Progress value={(wizardStep / totalSteps) * 100} /></div>
+          <div className="mx-auto max-w-4xl space-y-8">
+            <div className="mx-auto max-w-3xl"><Progress value={(wizardStep / totalSteps) * 100} /></div>
 
-            <div className="min-h-28">
+            <div className="min-h-[320px]">
               {wizardStep === 1 && (
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground text-center">What industry is your business in?</p>
@@ -270,7 +270,7 @@ const Index = () => {
 
               {wizardStep === 5 && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Excellent! Almost there.</h3>
+                  <h3 className="text-lg font-semibold text-center">Excellent! Almost there.</h3>
                   <p className="text-sm text-muted-foreground text-center">How do you prefer we make first contact?</p>
 
                   <div className="flex gap-2 justify-center">
@@ -292,9 +292,9 @@ const Index = () => {
 
               {wizardStep === 6 && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Great! Please provide your details.</h3>
+                  <h3 className="text-lg font-semibold text-center">Great! Please provide your details.</h3>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4">
                     <div className="md:col-span-1">
                       <label className="text-sm mb-2 block" htmlFor="lead-name">Your Name</label>
                       <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
@@ -341,9 +341,9 @@ const Index = () => {
           </div>
 
           {wizardStep <= totalSteps ? (
-            <DialogFooter>
-              <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
-              <div className="ml-auto flex gap-2">
+            <DialogFooter className="sm:justify-center">
+              <div className="flex w-full justify-center gap-2">
+                <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
                 <Button
                   variant="secondary"
                   onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
