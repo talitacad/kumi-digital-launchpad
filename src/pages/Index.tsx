@@ -216,8 +216,8 @@ const Index = () => {
             </DialogHeader>
           )}
 
-          <div className="mx-auto max-w-4xl space-y-8">
-            <div className="mx-auto max-w-3xl"><Progress value={(wizardStep / totalSteps) * 100} /></div>
+          <div className="mx-auto max-w-4xl space-y-8 text-center">
+            <div className="mx-auto w-[640px] max-w-full"><Progress value={(wizardStep / totalSteps) * 100} /></div>
 
             <div className="min-h-[320px]">
               {wizardStep === 1 && (
