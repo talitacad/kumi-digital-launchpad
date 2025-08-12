@@ -58,6 +58,10 @@ All colors MUST be HSL.
 
     /* Surfaces */
     --surface-soft: 0 0% 97%;
+
+    /* Component tokens */
+    --progress-track: 0 0% 88%; /* #E0E0E0 */
+    --progress-fill: var(--primary); /* #3D4D4E */
   }
 
   .dark {
@@ -99,6 +103,10 @@ All colors MUST be HSL.
 
     /* Surfaces */
     --surface-soft: 0 0% 97%;
+
+    /* Component tokens */
+    --progress-track: 0 0% 88%; /* #E0E0E0 */
+    --progress-fill: var(--primary); /* #3D4D4E */
   }
 
   * {
