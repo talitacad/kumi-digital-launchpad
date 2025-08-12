@@ -293,8 +293,46 @@ const Index = () => {
               {wizardStep === 6 && (
                 <section aria-labelledby="wizard-contact-title" className="mx-auto max-w-3xl w-full">
                   {contactMethod === "Phone" ? (
-                    <div className="min-h-[320px] flex items-center justify-center">
+                    <div className="space-y-6">
                       <h3 id="wizard-contact-title" className="text-xl font-semibold text-center text-foreground">Great! Please provide your details.</h3>
+
+                      <div className="max-w-md mx-auto space-y-5">
+                        <div>
+                          <label className="text-sm mb-2 block" htmlFor="lead-name">Your Name</label>
+                          <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
+                        </div>
+                        <div>
+                          <label className="text-sm mb-2 block" htmlFor="lead-email">Your Email</label>
+                          <Input id="lead-email" type="email" placeholder="you@company.com" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
+                        </div>
+                        <div>
+                          <label className="text-sm mb-2 block" htmlFor="lead-company">Company Name</label>
+                          <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
+                        </div>
+                        <div>
+                          <label className="text-sm mb-2 block" htmlFor="lead-phone">Phone Number</label>
+                          <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
+                        </div>
+                        <div>
+                          <label className="text-sm mb-2 block" htmlFor="best-time">Best time to call</label>
+                          <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
+                            <SelectTrigger id="best-time" aria-label="Best time to call">
+                              <SelectValue placeholder="Select a time" />
+                            </SelectTrigger>
+                            <SelectContent className="z-50 bg-popover">
+                              <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
+                              <SelectItem value="Afternoon (1pm-5pm)">Afternoon (1pm-5pm)</SelectItem>
+                              <SelectItem value="Evening (5pm-8pm)">Evening (5pm-8pm)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center">
+                        <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
+                          {isSubmittingLead ? "Submitting..." : "Submit"}
+                        </Button>
+                      </div>
                     </div>
                   ) : (
                     <div className="space-y-6">
