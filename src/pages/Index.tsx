@@ -5,11 +5,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Code, Search, Rocket, ChevronRight } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 const Index = () => {
   const { toast } = useToast();
   const [webhookUrl, setWebhookUrl] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [wizardOpen, setWizardOpen] = useState(false);
+  const [wizardStep, setWizardStep] = useState(1);
+  const totalSteps = 3;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,10 +89,84 @@ const Index = () => {
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
           <div className="hidden md:block">
-            <a href="#contact"><Button>Start a project</Button></a>
+            <Button onClick={() => setWizardOpen(true)}>Start a project</Button>
           </div>
         </nav>
       </header>
+
+      {/* Project Wizard Dialog */}
+      <Dialog
+        open={wizardOpen}
+        onOpenChange={(o) => {
+          setWizardOpen(o);
+          if (!o) setWizardStep(1);
+        }}
+      >
+        <DialogContent className="sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Project Wizard</DialogTitle>
+            <DialogDescription>
+              Answer a few quick questions to get started.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <Progress value={(wizardStep / totalSteps) * 100} />
+
+            <div className="min-h-28">
+              {wizardStep === 1 && (
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground">What do you want to build?</p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Web App</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Website</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(2)}>Automation</Button>
+                  </div>
+                </div>
+              )}
+
+              {wizardStep === 2 && (
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground">What’s your timeline?</p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="secondary" onClick={() => setWizardStep(3)}>ASAP</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(3)}>1–3 months</Button>
+                    <Button variant="secondary" onClick={() => setWizardStep(3)}>3+ months</Button>
+                  </div>
+                </div>
+              )}
+
+              {wizardStep === 3 && (
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground">Where can we reach you?</p>
+                  <Input type="email" placeholder="you@company.com" />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
+            <div className="ml-auto flex gap-2">
+              <Button
+                variant="secondary"
+                onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
+                disabled={wizardStep === 1}
+              >
+                Back
+              </Button>
+              <Button
+                onClick={() => {
+                  if (wizardStep < totalSteps) setWizardStep(wizardStep + 1);
+                  else setWizardOpen(false);
+                }}
+              >
+                {wizardStep < totalSteps ? "Next" : "Finish"}
+              </Button>
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <main>
         {/* Hero */}
