@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Code, Search, Rocket, ChevronRight } from "lucide-react";
+import { Code, Search, Rocket, ChevronRight, Menu } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useState } from "react";
 const Index = () => {
   const { toast } = useToast();
@@ -166,6 +167,29 @@ const Index = () => {
           </div>
           <div className="hidden md:block">
             <Button onClick={() => setWizardOpen(true)}>Start a project</Button>
+          </div>
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="secondary" size="icon" aria-label="Open menu">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <SheetHeader>
+                  <SheetTitle>Navigation</SheetTitle>
+                </SheetHeader>
+                <nav className="mt-4 flex flex-col gap-2">
+                  <a href="#home" className="py-2 border-b border-border">Home</a>
+                  <a href="#about" className="py-2 border-b border-border">About</a>
+                  <a href="#services" className="py-2 border-b border-border">Services</a>
+                  <a href="#contact" className="py-2">Contact</a>
+                  <SheetClose asChild>
+                    <Button className="mt-2" onClick={() => setWizardOpen(true)}>Start a project</Button>
+                  </SheetClose>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </nav>
       </header>
