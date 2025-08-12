@@ -341,9 +341,9 @@ const Index = () => {
           </div>
 
           {wizardStep <= totalSteps ? (
-            <DialogFooter className="sm:justify-center">
-              <div className="flex w-full justify-center gap-2">
-                <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
+            <DialogFooter className="w-full sm:justify-between">
+              <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
+              <div className="ml-auto flex gap-2">
                 <Button
                   variant="secondary"
                   onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
