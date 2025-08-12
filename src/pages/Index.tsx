@@ -319,7 +319,7 @@ const Index = () => {
                             <SelectTrigger id="best-time" aria-label="Best time to call">
                               <SelectValue placeholder="Select a time" />
                             </SelectTrigger>
-                            <SelectContent className="z-50 bg-popover">
+                            <SelectContent className="z-[60] bg-popover border border-border shadow-lg">
                               <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
                               <SelectItem value="Afternoon (1pm-5pm)">Afternoon (1pm-5pm)</SelectItem>
                               <SelectItem value="Evening (5pm-8pm)">Evening (5pm-8pm)</SelectItem>
@@ -328,11 +328,6 @@ const Index = () => {
                         </div>
                       </div>
 
-                      <div className="flex justify-center">
-                        <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
-                          {isSubmittingLead ? "Submitting..." : "Submit"}
-                        </Button>
-                      </div>
                     </div>
                   ) : (
                     <div className="space-y-6">
@@ -366,27 +361,35 @@ const Index = () => {
           </div>
 
           {wizardStep <= totalSteps ? (
-            <DialogFooter className="w-full sm:justify-between">
-              <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
-              <div className="ml-auto flex gap-2">
-                <Button
-                  variant="secondary"
-                  onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
-                  disabled={wizardStep === 1}
-                >
-                  Back
+            wizardStep === 6 && contactMethod === "Phone" ? (
+              <DialogFooter className="w-full justify-center">
+                <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
+                  {isSubmittingLead ? "Submitting..." : "Submit"}
                 </Button>
-                {wizardStep < totalSteps && (
+              </DialogFooter>
+            ) : (
+              <DialogFooter className="w-full sm:justify-between">
+                <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
+                <div className="ml-auto flex gap-2">
                   <Button
-                    onClick={() => {
-                      if (wizardStep < totalSteps) setWizardStep(wizardStep + 1);
-                    }}
+                    variant="secondary"
+                    onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
+                    disabled={wizardStep === 1}
                   >
-                    Next
+                    Back
                   </Button>
-                )}
-              </div>
-            </DialogFooter>
+                  {wizardStep < totalSteps && (
+                    <Button
+                      onClick={() => {
+                        if (wizardStep < totalSteps) setWizardStep(wizardStep + 1);
+                      }}
+                    >
+                      Next
+                    </Button>
+                  )}
+                </div>
+              </DialogFooter>
+            )
           ) : (
             <div className="flex justify-end">
               <Button onClick={() => { setWizardOpen(false); setWizardStep(1); }}>Close</Button>
