@@ -520,48 +520,25 @@ const Index = () => {
 
         {/* Contact */}
         <section id="contact" className="py-20 border-t border-border/60">
-          <div className="container mx-auto grid md:grid-cols-2 gap-10 items-start">
+          <div className="container mx-auto max-w-4xl text-center space-y-8">
             <div className="space-y-4">
               <h2 className="text-3xl md:text-4xl font-semibold">Ready to Start Your Project?</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                The best way to get in touch is by starting our quick project wizard. It helps us understand your needs right from the start, so we can have a much more productive first conversation.
+              </p>
             </div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Contact us</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form className="grid md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-                  <div className="md:col-span-2">
-                    <label className="text-xs text-muted-foreground mb-2 block" htmlFor="webhook">Zapier Webhook URL (admin)</label>
-                    <Input
-                      id="webhook"
-                      type="url"
-                      placeholder="https://hooks.zapier.com/hooks/catch/..."
-                      value={webhookUrl}
-                      onChange={(e) => setWebhookUrl(e.target.value)}
-                    />
-                  </div>
-                  <div className="md:col-span-1">
-                    <label className="text-sm mb-2 block" htmlFor="name">Name</label>
-                    <Input id="name" name="name" required placeholder="Your name" />
-                  </div>
-                  <div className="md:col-span-1">
-                    <label className="text-sm mb-2 block" htmlFor="email">Email</label>
-                    <Input id="email" name="email" type="email" required placeholder="you@company.com" />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="text-sm mb-2 block" htmlFor="company">Company</label>
-                    <Input id="company" name="company" placeholder="Company name" />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="text-sm mb-2 block" htmlFor="message">Message</label>
-                    <Textarea id="message" name="message" required placeholder="How can we help?" rows={5} />
-                  </div>
-                  <div className="md:col-span-2 flex justify-end">
-                    <Button type="submit" disabled={isSending}>{isSending ? "Sending..." : "Send message"}</Button>
-                  </div>
-                </form>
-              </CardContent>
-            </Card>
+            <div className="space-y-6">
+              <Button 
+                size="lg" 
+                className="px-8 py-3 text-lg"
+                onClick={() => setWizardOpen(true)}
+              >
+                Start a Project
+              </Button>
+              <p className="text-sm text-muted-foreground">
+                For general inquiries or other questions, you can reach us at: hello@wearekumi.com
+              </p>
+            </div>
           </div>
         </section>
       </main>
