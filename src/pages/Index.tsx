@@ -25,17 +25,11 @@ const Index = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactCompany, setContactCompany] = useState("");
   const [contactPhone, setContactPhone] = useState("");
-  const [bestTimeToCall, setBestTimeToCall] = useState("");
+  const [schedulingPreference, setSchedulingPreference] = useState<"email_link" | "call_to_schedule" | "">("");
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [wizardSuccessMessage, setWizardSuccessMessage] = useState("");
   const totalSteps = 6;
 
-  // Ensure the time dropdown shows the placeholder when entering Step 6 (Phone)
-  useEffect(() => {
-    if (wizardStep === 6 && contactMethod === "Phone") {
-      setBestTimeToCall("");
-    }
-  }, [wizardStep, contactMethod]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,68 +87,69 @@ const Index = () => {
   };
 
   const handleWizardSubmit = async () => {
-    // Basic validation
-    if (!contactMethod) {
-      toast({ title: "Select a contact method", description: "Choose Email or Phone to continue.", variant: "destructive" });
-      return;
-    }
-    if (!contactName || !contactEmail || !contactCompany || (contactMethod === "Phone" && (!contactPhone || !bestTimeToCall))) {
-      toast({ title: "Missing details", description: "Please fill in all required fields.", variant: "destructive" });
+    // Validation for new Step 5 (Data Collection)
+    if (wizardStep === 5) {
+      if (!contactName || !contactEmail || !contactCompany) {
+        toast({ title: "Missing details", description: "Please fill in all required fields.", variant: "destructive" });
+        return;
+      }
+      setWizardStep(6);
       return;
     }
 
-    setIsSubmittingLead(true);
-    const lead = {
-      timestamp: new Date().toISOString(),
-      source: "project_wizard",
-      industry,
-      challenge,
-      teamSize,
-      clientVolume,
-      contactMethod,
-      name: contactName,
-      email: contactEmail,
-      company: contactCompany,
-      phone: contactPhone || undefined,
-      bestTimeToCall: contactMethod === "Phone" ? bestTimeToCall : undefined,
-    };
-
-    try {
-      if (webhookUrl) {
-        await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          mode: "no-cors",
-          body: JSON.stringify({ type: "Lead", ...lead }),
-        });
+    // Final submission for Step 6
+    if (wizardStep === 6) {
+      if (!schedulingPreference) {
+        toast({ title: "Select scheduling preference", description: "Please choose how you'd like to schedule our first conversation.", variant: "destructive" });
+        return;
       }
 
-      const method = contactMethod;
-      const successMsg = method === "Email"
-        ? "Thank you! We've received your information and our team will contact you by email shortly with an initial analysis."
-        : "Thank you! We've received your information and our team will contact you by phone shortly to schedule a conversation at your preferred time.";
+      setIsSubmittingLead(true);
+      const lead = {
+        timestamp: new Date().toISOString(),
+        source: "project_wizard",
+        industry,
+        challenge,
+        teamSize,
+        clientVolume,
+        name: contactName,
+        email: contactEmail,
+        company: contactCompany,
+        phone: contactPhone || undefined,
+        schedulingPreference,
+      };
 
-      // Close popup and show success message
-      setWizardOpen(false);
-      setWizardStep(1);
-      toast({ title: "Success", description: successMsg });
+      try {
+        if (webhookUrl) {
+          await fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            mode: "no-cors",
+            body: JSON.stringify({ type: "Lead", ...lead }),
+          });
+        }
 
-      // Reset wizard fields
-      setIndustry("");
-      setChallenge("");
-      setTeamSize("");
-      setClientVolume("");
-      setContactMethod("");
-      setContactName("");
-      setContactEmail("");
-      setContactCompany("");
-      setContactPhone("");
-      setBestTimeToCall("");
-    } catch (error) {
-      console.error("Error submitting lead:", error);
-      toast({ title: "Error", description: "Failed to submit lead. Please try again.", variant: "destructive" });
-    } finally {
-      setIsSubmittingLead(false);
+        // Close popup and show success message
+        setWizardOpen(false);
+        setWizardStep(1);
+        toast({ title: "Success", description: "Thank you! We've received your information and our team will contact you via email within 24-48 hours." });
+
+        // Reset wizard fields
+        setIndustry("");
+        setChallenge("");
+        setTeamSize("");
+        setClientVolume("");
+        setContactName("");
+        setContactEmail("");
+        setContactCompany("");
+        setContactPhone("");
+        setSchedulingPreference("");
+      } catch (error) {
+        console.error("Error submitting lead:", error);
+        toast({ title: "Error", description: "Failed to submit lead. Please try again.", variant: "destructive" });
+      } finally {
+        setIsSubmittingLead(false);
+      }
     }
   };
 
@@ -276,99 +271,96 @@ const Index = () => {
               )}
 
               {wizardStep === 5 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-center">Excellent! Almost there.</h3>
-                  <p className="text-sm text-muted-foreground text-center">How do you prefer we make first contact?</p>
-
-                  <div className="flex gap-2 justify-center">
-                    <Button
-                      variant={contactMethod === "Email" ? "default" : "secondary"}
-                      onClick={() => { setContactMethod("Email"); setWizardStep(6); }}
-                    >
-                      Email
-                    </Button>
-                    <Button
-                      variant={contactMethod === "Phone" ? "default" : "secondary"}
-                      onClick={() => { setContactMethod("Phone"); setBestTimeToCall(""); setWizardStep(6); }}
-                    >
-                      Phone
-                    </Button>
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold text-center">To whom should we send the proposal?</h3>
+                  
+                  <div className="max-w-lg mx-auto space-y-4">
+                    <div>
+                      <label className="text-sm mb-2 block" htmlFor="lead-name">Your Full Name *</label>
+                      <Input 
+                        id="lead-name" 
+                        placeholder="Your full name" 
+                        value={contactName} 
+                        onChange={(e) => setContactName(e.target.value)}
+                        required 
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm mb-2 block" htmlFor="lead-company">Company Name *</label>
+                      <Input 
+                        id="lead-company" 
+                        placeholder="Company name" 
+                        value={contactCompany} 
+                        onChange={(e) => setContactCompany(e.target.value)}
+                        required 
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm mb-2 block" htmlFor="lead-email">Your Email *</label>
+                      <Input 
+                        id="lead-email" 
+                        type="email" 
+                        placeholder="you@company.com" 
+                        value={contactEmail} 
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        required 
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm mb-2 block" htmlFor="lead-phone">Your Phone Number (Optional)</label>
+                      <Input 
+                        id="lead-phone" 
+                        type="tel" 
+                        placeholder="(555) 555-5555" 
+                        value={contactPhone} 
+                        onChange={(e) => setContactPhone(e.target.value)} 
+                      />
+                    </div>
                   </div>
                 </div>
               )}
 
               {wizardStep === 6 && (
-                <section aria-labelledby="wizard-contact-title" className="mx-auto max-w-3xl w-full">
-                  {contactMethod === "Phone" ? (
-                    <div className="space-y-6">
-                      <h3 id="wizard-contact-title" className="text-xl font-semibold text-center text-foreground">Great! Please provide your details.</h3>
-
-                      <div className="max-w-md mx-auto space-y-0">
-                        <div>
-                          <label className="text-sm mb-0 block" htmlFor="lead-name">Your Name</label>
-                          <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
-                        </div>
-                        <div>
-                          <label className="text-sm mb-0 block" htmlFor="lead-email">Your Email</label>
-                          <Input id="lead-email" type="email" placeholder="you@company.com" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
-                        </div>
-                        <div>
-                          <label className="text-sm mb-0 block" htmlFor="lead-company">Company Name</label>
-                          <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
-                        </div>
-                        <div>
-                          <label className="text-sm mb-0 block" htmlFor="lead-phone">Phone Number</label>
-                          <Input id="lead-phone" type="tel" placeholder="(555) 555-5555" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
-                        </div>
-                        <div>
-                          <label className="text-sm mb-0 block" htmlFor="best-time">Best time to call</label>
-                          <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
-                            <SelectTrigger id="best-time" aria-label="Best time to call">
-                              <SelectValue placeholder="Select a time" />
-                            </SelectTrigger>
-                            <SelectContent className="z-[60] bg-popover border border-border shadow-lg">
-                              <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
-                              <SelectItem value="Afternoon (1pm-5pm)">Afternoon (1pm-5pm)</SelectItem>
-                              <SelectItem value="Evening (5pm-8pm)">Evening (5pm-8pm)</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold text-center">Thank You! We've received your project details.</h3>
+                  <p className="text-muted-foreground text-center max-w-2xl mx-auto">
+                    Our team will review your information and prepare a preliminary analysis. We will contact you primarily via email within the next 24-48 hours. What is the best way to schedule our first conversation?
+                  </p>
+                  
+                  <div className="max-w-lg mx-auto space-y-4">
+                    <div className="space-y-3">
+                      <label className="flex items-center space-x-3 cursor-pointer p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
+                        <input 
+                          type="radio" 
+                          name="schedulingPreference" 
+                          value="email_link"
+                          checked={schedulingPreference === "email_link"}
+                          onChange={(e) => setSchedulingPreference(e.target.value as "email_link")}
+                          className="text-primary focus:ring-primary"
+                        />
+                        <span className="text-sm">Send me a scheduling link via email (e.g., Calendly)</span>
+                      </label>
+                      
+                      <label className="flex items-center space-x-3 cursor-pointer p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
+                        <input 
+                          type="radio" 
+                          name="schedulingPreference" 
+                          value="call_to_schedule"
+                          checked={schedulingPreference === "call_to_schedule"}
+                          onChange={(e) => setSchedulingPreference(e.target.value as "call_to_schedule")}
+                          className="text-primary focus:ring-primary"
+                        />
+                        <span className="text-sm">Call me to find a good time</span>
+                      </label>
                     </div>
-                  ) : (
-                    <div className="space-y-6">
-                      <h3 id="wizard-contact-title" className="text-lg font-semibold text-center">Great! Please provide your details.</h3>
-
-                      <div className="grid md:grid-cols-2 gap-1">
-                        <div className="md:col-span-1">
-                          <label className="text-sm mb-0 block" htmlFor="lead-name">Your Name</label>
-                          <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
-                        </div>
-                        <div className="md:col-span-1">
-                          <label className="text-sm mb-0 block" htmlFor="lead-email">Your Email</label>
-                          <Input id="lead-email" type="email" placeholder="you@company.com" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
-                        </div>
-                        <div className="md:col-span-2">
-                          <label className="text-sm mb-0 block" htmlFor="lead-company">Company Name</label>
-                          <Input id="lead-company" placeholder="Company name" value={contactCompany} onChange={(e) => setContactCompany(e.target.value)} />
-                        </div>
-                      </div>
-
-                      <div className="flex justify-center">
-                        <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
-                          {isSubmittingLead ? "Submitting..." : "Submit"}
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </section>
+                  </div>
+                </div>
               )}
             </div>
           </div>
 
           {wizardStep <= totalSteps ? (
-            wizardStep === 6 && contactMethod === "Phone" ? (
+            wizardStep === 5 ? (
               <DialogFooter className="w-full sm:justify-between">
                 <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
                 <div className="ml-auto flex gap-2">
@@ -379,7 +371,22 @@ const Index = () => {
                     Back
                   </Button>
                   <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
-                    {isSubmittingLead ? "Submitting..." : "Submit"}
+                    {isSubmittingLead ? "Submitting..." : "Next"}
+                  </Button>
+                </div>
+              </DialogFooter>
+            ) : wizardStep === 6 ? (
+              <DialogFooter className="w-full sm:justify-between">
+                <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
+                <div className="ml-auto flex gap-2">
+                  <Button
+                    variant="secondary"
+                    onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
+                  >
+                    Back
+                  </Button>
+                  <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
+                    {isSubmittingLead ? "Submitting..." : "Confirm & Finish"}
                   </Button>
                 </div>
               </DialogFooter>
