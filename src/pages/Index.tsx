@@ -25,7 +25,7 @@ const Index = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactCompany, setContactCompany] = useState("");
   const [contactPhone, setContactPhone] = useState("");
-  const [schedulingPreference, setSchedulingPreference] = useState<"email_link" | "call_to_schedule" | "teams_meeting" | "zoom_meeting" | "">("");
+  const [schedulingPreference, setSchedulingPreference] = useState<"email_link" | "call_to_schedule" | "">("");
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [wizardSuccessMessage, setWizardSuccessMessage] = useState("");
   const totalSteps = 6;
@@ -349,30 +349,6 @@ const Index = () => {
                           className="text-primary focus:ring-primary"
                         />
                         <span className="text-sm text-foreground">Call me to find a good time</span>
-                      </label>
-                      
-                      <label className="flex items-center space-x-3 cursor-pointer p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
-                        <input 
-                          type="radio" 
-                          name="schedulingPreference" 
-                          value="teams_meeting"
-                          checked={schedulingPreference === "teams_meeting"}
-                          onChange={(e) => setSchedulingPreference(e.target.value as "teams_meeting")}
-                          className="text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-foreground">Schedule a Microsoft Teams meeting</span>
-                      </label>
-                      
-                      <label className="flex items-center space-x-3 cursor-pointer p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
-                        <input 
-                          type="radio" 
-                          name="schedulingPreference" 
-                          value="zoom_meeting"
-                          checked={schedulingPreference === "zoom_meeting"}
-                          onChange={(e) => setSchedulingPreference(e.target.value as "zoom_meeting")}
-                          className="text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-foreground">Schedule a Zoom meeting</span>
                       </label>
                     </div>
                   </div>
