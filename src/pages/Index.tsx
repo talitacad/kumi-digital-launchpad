@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Code, Search, Rocket, ChevronRight, Menu } from "lucide-react";
+import { Code, Search, Rocket, ChevronRight, Menu, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
@@ -430,11 +430,31 @@ const Index = () => {
             </div>
             <div className="md:col-span-5">
               <div className="rounded-xl border border-border/60 bg-gradient-to-br from-primary/10 to-accent/10 p-8 shadow-[var(--shadow-glow)]">
-                <p className="text-sm uppercase tracking-widest text-muted-foreground mb-3">Trusted outcomes</p>
+                <h3 className="text-xl font-semibold text-foreground mb-4">Simple Solutions for Real Businesses</h3>
+                <p className="text-sm text-muted-foreground mb-6">
+                  We build digital tools for service-based businesses ready to leave operational chaos behind. Whether you need a powerful custom platform or a simple, professional website, we can help if you are:
+                </p>
                 <ul className="space-y-3 text-sm text-foreground">
-                  <li>• 10x faster delivery with modern tooling</li>
-                  <li>• Battle-tested architectures</li>
-                  <li>• Security-first by design</li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>A growing <span className="font-semibold">Language School</span> managing students and classes.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>A busy <span className="font-semibold">Fitness Studio or Gym</span> scheduling sessions and members.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>A professional <span className="font-semibold">Service Provider</span> (like a clinic or agency) juggling clients and appointments.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>A business of any kind feeling stuck in a maze of spreadsheets.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>An entrepreneur who just needs a simple, professional website to build credibility and serve as a digital storefront.</span>
+                  </li>
                 </ul>
               </div>
             </div>
