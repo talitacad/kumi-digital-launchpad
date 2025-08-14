@@ -414,7 +414,7 @@ const Index = () => {
                 Time to rise.
               </h1>
               <p className="font-montserrat text-lg md:text-xl text-primary max-w-2xl">
-                We build custom digital systems that organize your operational chaos and prepare your business to grow.
+                We replace manual spreadsheets and scattered notes with a simple, custom platform that gives you back control and clarity.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="#contact">
