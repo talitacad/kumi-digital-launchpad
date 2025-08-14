@@ -340,7 +340,7 @@ const Index = () => {
                     <div className="space-y-6">
                       <h3 id="wizard-contact-title" className="text-lg font-semibold text-center">Great! Please provide your details.</h3>
 
-                      <div className="grid md:grid-cols-2 gap-4">
+                      <div className="grid md:grid-cols-2 gap-1">
                         <div className="md:col-span-1">
                           <label className="text-sm mb-0 block" htmlFor="lead-name">Your Name</label>
                           <Input id="lead-name" placeholder="Your full name" value={contactName} onChange={(e) => setContactName(e.target.value)} />
