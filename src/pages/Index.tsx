@@ -321,7 +321,7 @@ const Index = () => {
               {wizardStep === 6 && (
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold text-center">Thank You! We've received your project details.</h3>
-                  <p className="text-muted-foreground text-center max-w-2xl mx-auto">
+                  <p className="text-foreground text-center max-w-2xl mx-auto">
                     Our team will review your information and prepare a preliminary analysis. We will contact you primarily via email within the next 24-48 hours. What is the best way to schedule our first conversation?
                   </p>
                   
