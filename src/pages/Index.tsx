@@ -324,7 +324,7 @@ const Index = () => {
                           <label className="text-sm mb-0 block" htmlFor="best-time">Best time to call</label>
                           <Select value={bestTimeToCall} onValueChange={setBestTimeToCall}>
                             <SelectTrigger id="best-time" aria-label="Best time to call">
-                              <SelectValue placeholder="Selecione um dos horários" />
+                              <SelectValue placeholder="Select a time" />
                             </SelectTrigger>
                             <SelectContent className="z-[60] bg-popover border border-border shadow-lg">
                               <SelectItem value="Morning (9am-12pm)">Morning (9am-12pm)</SelectItem>
@@ -369,10 +369,19 @@ const Index = () => {
 
           {wizardStep <= totalSteps ? (
             wizardStep === 6 && contactMethod === "Phone" ? (
-              <DialogFooter className="w-full justify-center">
-                <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
-                  {isSubmittingLead ? "Submitting..." : "Submit"}
-                </Button>
+              <DialogFooter className="w-full sm:justify-between">
+                <Button variant="ghost" onClick={() => setWizardOpen(false)}>Cancel</Button>
+                <div className="ml-auto flex gap-2">
+                  <Button
+                    variant="secondary"
+                    onClick={() => setWizardStep(Math.max(1, wizardStep - 1))}
+                  >
+                    Back
+                  </Button>
+                  <Button onClick={handleWizardSubmit} disabled={isSubmittingLead}>
+                    {isSubmittingLead ? "Submitting..." : "Submit"}
+                  </Button>
+                </div>
               </DialogFooter>
             ) : (
               <DialogFooter className="w-full sm:justify-between">
