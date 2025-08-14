@@ -522,8 +522,7 @@ const Index = () => {
         <section id="contact" className="py-20 border-t border-border/60">
           <div className="container mx-auto grid md:grid-cols-2 gap-10 items-start">
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-semibold">Let's build something great</h2>
-              <p className="text-muted-foreground">Tell us about your goals. We'll follow up within one business day.</p>
+              <h2 className="text-3xl md:text-4xl font-semibold">Ready to Start Your Project?</h2>
             </div>
             <Card>
               <CardHeader>
