@@ -472,7 +472,7 @@ const Index = () => {
             <div className="grid md:grid-cols-3 gap-6">
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Search className="size-5 text-primary" /> Discovery & Strategy</CardTitle>
+                  <CardTitle className="flex items-center gap-3"><Search className="size-5 text-primary" /> We Listen, We Understand</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground">
                   We dive deep into your current operations to understand your unique challenges and map out a clear path for digital transformation.
@@ -480,7 +480,7 @@ const Index = () => {
               </Card>
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Code className="size-5 text-primary" /> Custom Development</CardTitle>
+                  <CardTitle className="flex items-center gap-3"><Code className="size-5 text-primary" /> We Build Your Platform</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground">
                   Our team builds your tailored platform using flexible and powerful technology, ensuring it fits your process perfectly.
@@ -488,7 +488,7 @@ const Index = () => {
               </Card>
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Rocket className="size-5 text-primary" /> Launch & Support</CardTitle>
+                  <CardTitle className="flex items-center gap-3"><Rocket className="size-5 text-primary" /> We Launch and Support You</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground">
                   We handle the full implementation, train your team, and provide ongoing support to ensure your business continues to rise.
