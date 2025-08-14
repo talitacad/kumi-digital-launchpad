@@ -459,7 +459,7 @@ const Index = () => {
             <div className="md:col-span-7 space-y-4 font-montserrat">
               <h2 className="font-playfair text-3xl md:text-4xl font-semibold">Our Mission is Your Growth.</h2>
               <p className="text-muted-foreground leading-relaxed">
-                KUMI was born from a simple observation: growing businesses are often left behind by technology. Generic tools don't fit, and custom solutions are out of reach. Our mission is to fill this gap. We believe technology should adapt to human processes, not the other way around. Our team of strategists and engineers partners with you to build the exact solution your operation needs. The name KUMI comes from the ancient Aramaic word for 'Rise'. It's our promise to every client: to provide the foundation for your business to rise.
+                Your business is unique. Your software should be too. KUMI was born from a simple observation: generic tools don't fit the way you work, and complex solutions are often out of reach. We build simple, tailor-made digital platforms that organize your operations, from client tracking to daily tasks, freeing you to focus on what you do best: growing your business.
               </p>
             </div>
           </div>
