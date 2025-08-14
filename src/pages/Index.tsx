@@ -169,7 +169,6 @@ const Index = () => {
             <a href="#home" className="hover:text-primary transition-colors">Home</a>
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#services" className="hover:text-primary transition-colors">Services</a>
-            <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
           <div className="hidden md:block">
             <Button onClick={() => setWizardOpen(true)}>Start a project</Button>
@@ -188,8 +187,7 @@ const Index = () => {
                 <nav className="mt-4 flex flex-col gap-2">
                   <a href="#home" className="py-2 border-b border-border">Home</a>
                   <a href="#about" className="py-2 border-b border-border">About</a>
-                  <a href="#services" className="py-2 border-b border-border">Services</a>
-                  <a href="#contact" className="py-2">Contact</a>
+                  <a href="#services" className="py-2">Services</a>
                   <SheetClose asChild>
                     <Button className="mt-2" onClick={() => setWizardOpen(true)}>Start a project</Button>
                   </SheetClose>
