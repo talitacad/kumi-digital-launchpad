@@ -336,7 +336,7 @@ const Index = () => {
                           onChange={(e) => setSchedulingPreference(e.target.value as "email_link")}
                           className="text-primary focus:ring-primary"
                         />
-                        <span className="text-sm">Send me a scheduling link via email (e.g., Calendly)</span>
+                        <span className="text-sm text-foreground">Send me a scheduling link via email (e.g., Calendly)</span>
                       </label>
                       
                       <label className="flex items-center space-x-3 cursor-pointer p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
@@ -348,7 +348,7 @@ const Index = () => {
                           onChange={(e) => setSchedulingPreference(e.target.value as "call_to_schedule")}
                           className="text-primary focus:ring-primary"
                         />
-                        <span className="text-sm">Call me to find a good time</span>
+                        <span className="text-sm text-foreground">Call me to find a good time</span>
                       </label>
                     </div>
                   </div>
