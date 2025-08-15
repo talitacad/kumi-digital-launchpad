@@ -14,7 +14,96 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      project_leads: {
+        Row: {
+          client_volume: string
+          contact_company: string
+          contact_email: string
+          contact_name: string
+          contact_phone: string | null
+          created_at: string
+          id: string
+          industry: string
+          main_challenge: string
+          scheduling_preference: string
+          source: string
+          status: string
+          team_size: string
+          timestamp: string
+          updated_at: string
+        }
+        Insert: {
+          client_volume: string
+          contact_company: string
+          contact_email: string
+          contact_name: string
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          industry: string
+          main_challenge: string
+          scheduling_preference: string
+          source?: string
+          status?: string
+          team_size: string
+          timestamp?: string
+          updated_at?: string
+        }
+        Update: {
+          client_volume?: string
+          contact_company?: string
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          industry?: string
+          main_challenge?: string
+          scheduling_preference?: string
+          source?: string
+          status?: string
+          team_size?: string
+          timestamp?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
