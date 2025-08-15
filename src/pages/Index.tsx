@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Progress } from "@/components/ui/progress";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 const Index = () => {
   const { toast } = useToast();
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -40,34 +41,43 @@ const Index = () => {
     const company = String(data.get("company") || "");
     const message = String(data.get("message") || "");
 
-    if (!webhookUrl) {
-      toast({
-        title: "Webhook required",
-        description: "Please enter your Zapier webhook URL to send the email.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSending(true);
 
     try {
-      await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "no-cors",
-        body: JSON.stringify({
-          timestamp: new Date().toISOString(),
-          destination_email: "talitacad@gmail.com",
+      // Save to Supabase
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert({
           name,
           email,
           company,
           message,
-          triggered_from: window.location.origin,
-        }),
-      });
+          source: 'contact_form'
+        });
+
+      if (dbError) {
+        throw new Error(`Database error: ${dbError.message}`);
+      }
+
+      // Also send webhook if configured
+      if (webhookUrl) {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "no-cors",
+          body: JSON.stringify({
+            timestamp: new Date().toISOString(),
+            destination_email: "talitacad@gmail.com",
+            name,
+            email,
+            company,
+            message,
+            triggered_from: window.location.origin,
+          }),
+        });
+      }
 
       toast({
         title: "Thanks!",
@@ -75,10 +85,10 @@ const Index = () => {
       });
       form.reset();
     } catch (error) {
-      console.error("Error triggering webhook:", error);
+      console.error("Error submitting form:", error);
       toast({
         title: "Error",
-        description: "Failed to send. Please check the webhook URL and try again.",
+        description: "Failed to send. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -105,22 +115,44 @@ const Index = () => {
       }
 
       setIsSubmittingLead(true);
-      const lead = {
-        timestamp: new Date().toISOString(),
-        source: "project_wizard",
-        industry,
-        challenge,
-        teamSize,
-        clientVolume,
-        name: contactName,
-        email: contactEmail,
-        company: contactCompany,
-        phone: contactPhone || undefined,
-        schedulingPreference,
-      };
 
       try {
+        // Save to Supabase
+        const { error: dbError } = await supabase
+          .from('project_leads')
+          .insert({
+            industry,
+            main_challenge: challenge,
+            team_size: teamSize,
+            client_volume: clientVolume,
+            contact_name: contactName,
+            contact_email: contactEmail,
+            contact_company: contactCompany,
+            contact_phone: contactPhone || null,
+            scheduling_preference: schedulingPreference,
+            source: 'project_wizard'
+          });
+
+        if (dbError) {
+          throw new Error(`Database error: ${dbError.message}`);
+        }
+
+        // Also send webhook if configured
         if (webhookUrl) {
+          const lead = {
+            timestamp: new Date().toISOString(),
+            source: "project_wizard",
+            industry,
+            challenge,
+            teamSize,
+            clientVolume,
+            name: contactName,
+            email: contactEmail,
+            company: contactCompany,
+            phone: contactPhone || undefined,
+            schedulingPreference,
+          };
+
           await fetch(webhookUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
