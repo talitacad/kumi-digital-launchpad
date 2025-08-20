@@ -11,6 +11,8 @@ import { Progress } from "@/components/ui/progress";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import FAQ from "@/components/FAQ";
+import TrustSignals from "@/components/TrustSignals";
 const Index = () => {
   const { toast } = useToast();
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -457,49 +459,46 @@ const Index = () => {
           <div className="container mx-auto grid md:grid-cols-12 gap-8 items-center py-24">
             <div className="md:col-span-7 space-y-6">
               <h1 className="font-playfair text-primary text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-                Time to rise.
+                Transform Your Service Business with Custom Software
               </h1>
               <p className="font-montserrat text-lg md:text-xl text-primary max-w-2xl">
-                We replace manual spreadsheets and scattered notes with a simple, custom platform that gives you back control and clarity.
+                Replace manual spreadsheets and scattered notes with tailored digital platforms that give you back control and clarity. Specialized solutions for language schools, fitness studios, clinics, and professional services.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="#contact">
                   <Button className="group">
-                    Get a consultation
+                    Get a free consultation
                     <ChevronRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" />
                   </Button>
                 </a>
                 <a href="#services">
-                  <Button variant="secondary">Explore services</Button>
+                  <Button variant="secondary">Explore our services</Button>
                 </a>
               </div>
             </div>
             <div className="md:col-span-5">
               <div className="rounded-xl border border-border/60 bg-gradient-to-br from-primary/10 to-accent/10 p-8 shadow-[var(--shadow-glow)]">
-                <h3 className="text-xl font-semibold text-foreground mb-4">Simple Solutions for Real Businesses</h3>
+                <h2 className="text-xl font-semibold text-foreground mb-4">What is KUMI Digital?</h2>
                 <p className="text-sm text-muted-foreground mb-6">
-                  We build digital tools for service-based businesses ready to leave operational chaos behind. Whether you need a powerful custom platform or a simple, professional website, we can help if you are:
+                  KUMI Digital is a boutique tech consultancy that builds simple, custom software solutions for service-based businesses ready to leave operational chaos behind. We specialize in replacing spreadsheets with organized digital platforms.
                 </p>
+                <h3 className="text-lg font-medium text-foreground mb-4">Ideal for:</h3>
                 <ul className="space-y-3 text-sm text-foreground">
                   <li className="flex items-start gap-3">
                     <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>A growing <span className="font-semibold">Language School</span> managing students and classes.</span>
+                    <span><strong>Language Schools</strong> managing students, classes, and curriculum</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>A busy <span className="font-semibold">Fitness Studio or Gym</span> scheduling sessions and members.</span>
+                    <span><strong>Fitness Studios & Gyms</strong> scheduling sessions, tracking members</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>A professional <span className="font-semibold">Service Provider</span> (like a clinic or agency) juggling clients and appointments.</span>
+                    <span><strong>Medical & Professional Services</strong> managing clients and appointments</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>A business of any kind feeling stuck in a maze of spreadsheets.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>An entrepreneur who just needs a simple, professional website to build credibility and serve as a digital storefront.</span>
+                    <span><strong>Any Service Business</strong> drowning in spreadsheets and manual processes</span>
                   </li>
                 </ul>
               </div>
@@ -514,7 +513,7 @@ const Index = () => {
             <div className="md:col-span-5 flex justify-center">
               <img
                 src="/lovable-uploads/ac2d0f5f-7c53-4040-a503-e3c1000c94bf.png"
-                alt="KUMI Digital primary logo"
+                alt="KUMI Digital primary logo representing custom software development for service businesses"
                 className="w-48 sm:w-56 md:w-72 lg:w-80 xl:w-96 h-auto"
                 loading="lazy"
                 decoding="async"
@@ -522,11 +521,37 @@ const Index = () => {
             </div>
 
             {/* Right: Mission copy */}
-            <div className="md:col-span-7 space-y-4 font-montserrat">
-              <h2 className="font-playfair text-3xl md:text-4xl font-semibold">Our Mission is Your Growth.</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Your business is unique. Your software should be too. KUMI was born from a simple observation: generic tools don't fit the way you work, and complex solutions are often out of reach. We build simple, tailor-made digital platforms that organize your operations, from client tracking to daily tasks, freeing you to focus on what you do best: growing your business.
-              </p>
+            <div className="md:col-span-7 space-y-6 font-montserrat">
+              <h2 className="font-playfair text-3xl md:text-4xl font-semibold">Our Mission: Simplifying Service Business Operations</h2>
+              
+              <div className="space-y-4">
+                <h3 className="text-xl font-medium">Why Choose Custom Software Over Generic Tools?</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Your business is unique, and your software should be too. KUMI was founded on a simple observation: generic tools don't fit the way service businesses actually work, and complex enterprise solutions are often out of reach for small to medium businesses.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-xl font-medium">The KUMI Difference</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span><strong>Tailored Solutions:</strong> We build software that matches your specific workflow, not the other way around</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span><strong>Service Business Focus:</strong> We understand the unique challenges of client management, scheduling, and service delivery</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span><strong>Simplified Operations:</strong> Replace multiple spreadsheets and tools with one organized platform</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="size-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span><strong>Growth-Focused:</strong> Free up your time to focus on what you do best: growing your business</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -534,43 +559,117 @@ const Index = () => {
         {/* Services */}
         <section id="services" className="py-20 border-t border-border/60">
           <div className="container mx-auto">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-10">Services</h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">How KUMI Digital Works: Our 3-Step Process</h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                We follow a proven methodology to transform your service business operations from chaos to clarity. Here's exactly how we work with you:
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Search className="size-5 text-primary" /> Discovery & Design</CardTitle>
+                  <CardTitle className="flex items-center gap-3">
+                    <Search className="size-5 text-primary" /> 
+                    <span>Step 1: Discovery & Design</span>
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  We start by listening. We dive deep to understand your goals and challenges, then design a clear, strategic solution tailored to your needs.
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    We start by listening. Our discovery process dives deep to understand your specific goals, daily challenges, and workflow requirements.
+                  </p>
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-sm">What We Do:</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>• Analyze your current processes and pain points</li>
+                      <li>• Map out your ideal workflow and requirements</li>
+                      <li>• Design a strategic solution tailored to your needs</li>
+                      <li>• Create detailed project specifications and timeline</li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
+
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Code className="size-5 text-primary" /> Development & Delivery</CardTitle>
+                  <CardTitle className="flex items-center gap-3">
+                    <Code className="size-5 text-primary" /> 
+                    <span>Step 2: Development & Delivery</span>
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  Our team builds your custom platform or website with precision and care. We handle all the technical details, delivering a finished product ready for launch.
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Our experienced team builds your custom platform or website with precision and care, handling all technical details for a finished product ready for launch.
+                  </p>
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-sm">What You Get:</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>• Custom-built software matching your exact needs</li>
+                      <li>• Clean, intuitive interface designed for your workflow</li>
+                      <li>• Secure, reliable platform hosted in the cloud</li>
+                      <li>• Mobile-responsive design for access anywhere</li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
+
               <Card className="hover:shadow-[var(--shadow-elevate)] transition-shadow">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3"><Rocket className="size-5 text-primary" /> Training & Support</CardTitle>
+                  <CardTitle className="flex items-center gap-3">
+                    <Rocket className="size-5 text-primary" /> 
+                    <span>Step 3: Training & Support</span>
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  We don't just hand over the keys. We train your team to use the new tools effectively and provide ongoing support to ensure your continued success.
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    We don't just hand over the keys. We provide comprehensive training and ongoing support to ensure your team can effectively use the new tools and achieve continued success.
+                  </p>
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-sm">Ongoing Support:</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>• Comprehensive team training sessions</li>
+                      <li>• User documentation and best practice guides</li>
+                      <li>• Technical support and maintenance</li>
+                      <li>• Updates and feature enhancements as needed</li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             </div>
+
+            <div className="mt-12 text-center">
+              <h3 className="text-xl font-semibold mb-4">Typical Project Timeline</h3>
+              <div className="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <div className="font-medium">Discovery Phase</div>
+                  <div className="text-sm text-muted-foreground">1-2 weeks</div>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <div className="font-medium">Development Phase</div>
+                  <div className="text-sm text-muted-foreground">4-10 weeks</div>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <div className="font-medium">Training & Launch</div>
+                  <div className="text-sm text-muted-foreground">1-2 weeks</div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
+
+        {/* Trust Signals */}
+        <TrustSignals />
+
+        {/* FAQ */}
+        <FAQ />
 
         {/* Contact */}
         <section id="contact" className="py-20 border-t border-border/60">
           <div className="container mx-auto max-w-4xl text-center space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-semibold">Ready to Start Your Project?</h2>
+              <h2 className="text-3xl md:text-4xl font-semibold">Ready to Transform Your Service Business?</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                The best way to get in touch is by starting our quick project wizard. It helps us understand your needs right from the start, so we can have a much more productive first conversation.
+                The best way to get started is through our Project Wizard. It helps us understand your specific needs and challenges, so we can have a much more productive first conversation and provide an accurate assessment.
               </p>
             </div>
             <div className="space-y-6">
@@ -579,11 +678,16 @@ const Index = () => {
                 className="px-8 py-3 text-lg"
                 onClick={() => setWizardOpen(true)}
               >
-                Start a Project
+                Start Your Project Assessment
               </Button>
-              <p className="text-sm text-muted-foreground">
-                For general inquiries or other questions, you can reach us at: hello@wearekumi.com
-              </p>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  <strong>Free Consultation:</strong> No commitment required. Get expert advice on your specific situation.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  For general inquiries: <a href="mailto:hello@wearekumi.com" className="text-primary hover:underline">hello@wearekumi.com</a>
+                </p>
+              </div>
             </div>
           </div>
         </section>
